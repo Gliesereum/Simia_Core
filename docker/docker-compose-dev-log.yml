@@ -1,0 +1,404 @@
+version: '3.4'
+
+services:
+  rabbit:
+    image: rabbitmq:3.7.8-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+      - 61613:61613
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbit
+      RABBITMQ_DEFAULT_PASS: Af2f4dsASF
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ../config/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+    environment:
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+      ES_JAVA_OPTS: "-Xms800M -Xmx3072M"
+    ports:
+    - 9200:9200
+    - 9300:9300
+    deploy:
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+    volumes:
+    - ../volumes/elasticsearch:/usr/share/elasticsearch/data
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.4.2
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_USERNAME: elastic
+    deploy:
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5601"]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.4.2
+    environment:
+      RABBIT_HOST: rabbit
+      RABBIT_PORT: 5672
+      RABBIT_USER: rabbit
+      RABBIT_PASSWORD: Af2f4dsASF
+      ES_HOST: elasticsearch
+      ES_PORT: 9200
+      LS_JAVA_OPTS: "-Xms100M -Xmx1G"
+      LOG_SYSTEM_QUEUE: logSystemQueue
+      LOG_REQUEST_QUEUE: logRequestQueue
+    deploy:
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9600"]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+    volumes:
+    - ../config/elk/logstash/logstash.request.conf:/usr/share/logstash/pipeline/logstash.request.conf
+    - ../config/elk/logstash/logstash.system.conf:/usr/share/logstash/pipeline/logstash.system.conf
+    - ../config/elk/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+    - /usr/config/geoconfig/GeoLite2-City.mmdb:/usr/share/geoconfig/GeoLite2-City.mmdb
+
+  curator:
+    image: gls-curator:0.1.4
+    environment:
+      ES_HOST: elasticsearch
+      ES_PORT: 9200
+      CRON: '15 0 * * *'
+      #CRON: '*/5 * * * *'
+      CONFIG_FILE: /curator/config/curator.yml
+      COMMAND: /curator/config/actions.yml
+      #delete indeces older 10 days
+      UNIT_COUNT: 10
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+    - ../config/elk/curator:/.curator
+    - ../config/elk/curator/logs:/curator/logs/
+
+  discovery:
+    image: gls-discovery:0.1.4
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      server.port: 8761
+      spring.profiles.active: docker
+      eureka.instance.hostname: discovery
+    ports:
+      - 8761:8761
+
+  account:
+    image: gls-account:0.1.4
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      server.port: 8210
+      spring.profiles.active: docker
+      db.host: 46.101.182.178
+      db.database: glsdev
+      db.port: 26780
+      db.username: postgres
+      db.password: GliesereumAdmin0013
+      redis.host: 46.101.182.178
+      redis.port: 6379
+      redis.password: GliesereumAdmin0013
+      redis.database-index: 0
+      rabbit.host: rabbit
+      rabbit.port: 5672
+      rabbit.user: rabbit
+      rabbit.password: Af2f4dsASF
+      eureka.host: discovery
+      eureka.port: 8761
+      LOG_SYSTEM_QUEUE: logSystemQueue
+      LOG_REQUEST_QUEUE: logRequestQueue
+      swagger.enable: "true"
+      auth.sms.prefix: "Coupler CPS:"
+
+  mail:
+    image: gls-mail:0.1.4
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      server.port: 8220
+      spring.profiles.active: docker
+      db.host: 46.101.182.178
+      db.database: glsdev
+      db.port: 26780
+      db.username: postgres
+      db.password: GliesereumAdmin0013
+      rabbit.host: rabbit
+      rabbit.port: 5672
+      rabbit.user: rabbit
+      rabbit.password: Af2f4dsASF
+      mail.host: mail.adm.tools
+      mail.username: support@gliesereum.com
+      mail.password: Support0013
+      mail.from: GLIESEREUM<support@gliesereum.com>
+      mail.subject: Gliesereum verification mail
+      mail.log-email: log@gliesereum.com
+      phone.acemount.api.alpha: SECURITY
+      phone.acemount.api.token: Bearer shiM8uESwOEAWEurmDWGNmY6LPSy_x1m
+      phone.mobizon.api.token: ua6bf786d392ac07d7045f72bc72687e24d80cd08d00e35e4f22736534b1a83b2f3163
+      phone.send-sms: "true"
+      eureka.host: discovery
+      eureka.port: 8761
+      LOG_SYSTEM_QUEUE: logSystemQueue
+      LOG_REQUEST_QUEUE: logRequestQueue
+      swagger.enable: "true"
+      telegram.bot.username: "coupler_feedback_dev_bot"
+      telegram.bot.token: "966060711:AAExu0BrqYpybx1ERtUNzTSeo5S0_GKb7LM"
+
+  proxy:
+    image: gls-proxy:0.1.4
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      server.port: 8200
+      spring.profiles.active: docker
+      rabbit.host: rabbit
+      rabbit.port: 5672
+      rabbit.user: rabbit
+      rabbit.password: Af2f4dsASF
+      eureka.host: discovery
+      eureka.port: 8761
+      LOG_SYSTEM_QUEUE: logSystemQueue
+      LOG_REQUEST_QUEUE: logRequestQueue
+      swagger.enable: "true"
+
+  permission:
+    image: gls-permission:0.1.4
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      server.port: 8230
+      spring.profiles.active: docker
+      db.host: 46.101.182.178
+      db.database: glsdev
+      db.port: 26780
+      db.username: postgres
+      db.password: GliesereumAdmin0013
+      rabbit.host: rabbit
+      rabbit.port: 5672
+      rabbit.user: rabbit
+      rabbit.password: Af2f4dsASF
+      eureka.host: discovery
+      eureka.port: 8761
+      LOG_SYSTEM_QUEUE: logSystemQueue
+      LOG_REQUEST_QUEUE: logRequestQueue
+      swagger.enable: "true"
+
+  karma:
+    image: gls-karma:0.1.4
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      server.port: 8240
+      spring.profiles.active: docker
+      db.host: 46.101.182.178
+      db.database: glsdev
+      db.port: 26780
+      db.username: postgres
+      db.password: GliesereumAdmin0013
+      rabbit.host: rabbit
+      rabbit.port: 5672
+      rabbit.user: rabbit
+      rabbit.password: Af2f4dsASF
+      es.host: elasticsearch
+      es.port: 9200
+      eureka.host: discovery
+      eureka.port: 8761
+      LOG_SYSTEM_QUEUE: logSystemQueue
+      LOG_REQUEST_QUEUE: logRequestQueue
+      swagger.enable: "true"
+
+  file:
+    image: gls-file:0.1.4
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      server.port: 8250
+      spring.profiles.active: docker
+      db.host: 46.101.182.178
+      db.database: glsdev
+      db.port: 26780
+      db.username: postgres
+      db.password: GliesereumAdmin0013
+      rabbit.host: rabbit
+      rabbit.port: 5672
+      rabbit.user: rabbit
+      rabbit.password: Af2f4dsASF
+      cdn.accessKey: XJSIQ6UA5HZEHMH3DDUP
+      cdn.secretKey: C5PSCSJgAG4VaCYUSJaK9SA/pDHX/kE7BLatMHEz90I
+      cdn.host: sgp1.digitaloceanspaces.com
+      cdn.region: sgp1
+      cdn.bucket: glcdn
+      cdn.folder: karma
+      eureka.host: discovery
+      eureka.port: 8761
+      LOG_SYSTEM_QUEUE: logSystemQueue
+      LOG_REQUEST_QUEUE: logRequestQueue
+      swagger.enable: "true"
+
+  lending-gallery:
+    image: gls-lending-gallery:0.1.4
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      server.port: 8260
+      spring.profiles.active: docker
+      db.host: 46.101.182.178
+      db.database: glsdev
+      db.port: 26780
+      db.username: postgres
+      db.password: GliesereumAdmin0013
+      rabbit.host: rabbit
+      rabbit.port: 5672
+      rabbit.user: rabbit
+      rabbit.password: Af2f4dsASF
+      eureka.host: discovery
+      eureka.port: 8761
+      LOG_SYSTEM_QUEUE: logSystemQueue
+      LOG_REQUEST_QUEUE: logRequestQueue
+      swagger.enable: "true"
+
+#  socket:
+#    image: gls-socket:0.1.4
+#    deploy:
+#      restart_policy:
+#        condition: on-failure
+#    environment:
+#      server.port: 8550
+#      spring.profiles.active: docker
+#      rabbit.host: rabbit
+#      rabbit.port: 5672
+#      rabbit.stompPort: 61613
+#      rabbit.user: rabbit
+#      rabbit.password: Af2f4dsASF
+#      eureka.host: discovery
+#      eureka.port: 8761
+
+  notification:
+    image: gls-notification:0.1.4
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      server.port: 8270
+      spring.profiles.active: docker
+      db.host: 46.101.182.178
+      db.database: glsdev
+      db.port: 26780
+      db.username: postgres
+      db.password: GliesereumAdmin0013
+      rabbit.host: rabbit
+      rabbit.port: 5672
+      rabbit.user: rabbit
+      rabbit.password: Af2f4dsASF
+      eureka.host: discovery
+      eureka.port: 8761
+      firebase.properties.credentialPath: /config/google-services.json
+      firebase.properties.appName: coupler-13
+      LOG_SYSTEM_QUEUE: logSystemQueue
+      LOG_REQUEST_QUEUE: logRequestQueue
+      swagger.enable: "true"
+      telegram.bot.notification.token: "962353680:AAEeLbmbr6V_ibcovqaY6n0KOc_vkK0PQUg"
+      telegram.bot.notification.user-name: "coupler_worker_dev_bot"
+    volumes:
+      - /usr/config/google-services.json:/config/google-services.json
+
+  language:
+    image: gls-language:0.1.4
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      server.port: 8300
+      spring.profiles.active: docker
+      db.host: 167.99.195.233
+      db.database: coupler
+      db.port: 5432
+      db.username: couplerprod
+      db.password: GliesereumAdmin0013
+      rabbit.host: rabbit
+      rabbit.port: 5672
+      rabbit.user: rabbit
+      rabbit.password: Af2f4dsASF
+      eureka.host: discovery
+      eureka.port: 8761
+      LOG_SYSTEM_QUEUE: logSystemQueue
+      LOG_REQUEST_QUEUE: logRequestQueue
+      swagger.enable: "true"
+
+#  payment:
+#    image: gls-payment:0.1.4
+#    deploy:
+#      restart_policy:
+#        condition: on-failure
+#    environment:
+#      server.port: 8280
+#      spring.profiles.active: docker
+#      db.host: 46.101.182.178
+#      db.database: glsdev
+#      db.port: 26780
+#      db.username: postgres
+#      db.password: GliesereumAdmin0013
+#      rabbit.host: rabbit
+#      rabbit.port: 5672
+#      rabbit.user: rabbit
+#      rabbit.password: Af2f4dsASF
+#      eureka.host: discovery
+#      eureka.port: 8761
+
+  nginx:
+    image: nginx:1.15.7-alpine
+    volumes:
+      - ../config/nginx-dev:/etc/nginx
+      - /etc/letsencrypt/live/dev.gliesereum.com/fullchain.pem:/etc/nginx-ssl/fullchain.pem
+      - /etc/letsencrypt/live/dev.gliesereum.com/privkey.pem:/etc/nginx-ssl/privkey.pem
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - mode: host
+        protocol: tcp
+        published: 5601
+        target: 5601
+      - mode: host
+        protocol: tcp
+        published: 80
+        target: 80
+      - mode: host
+        protocol: tcp
+        published: 443
+        target: 443
+
+networks:
+  bridge:
+    external:
+      name: bridge

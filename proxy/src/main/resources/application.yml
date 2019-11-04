@@ -1,0 +1,99 @@
+# serivce name
+spring:
+  application:
+    name: proxy-service
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+logging.level.org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter: ERROR
+
+server:
+  port: 8200
+  servlet:
+    context-path: /api
+
+zuul:
+  routes:
+    account-service:
+      path: /account/v1/**
+      service-id: account-service
+    permission-service:
+      path: /permission/v1/**
+      service-id: permission-service
+    mail-service:
+      path: /mail/v1/**
+      service-id: mail-service
+    karma-service:
+      path: /karma/v1/**
+      service-id: karma-service
+    file-service:
+      path: /file/v1/**
+      service-id: file-service
+    lending-gallery-service:
+      path: /lending-gallery/v1/**
+      service-id: lending-gallery-service
+    notification-service:
+      path: /notification/v1/**
+      service-id: notification-service
+    payment-service:
+      path: /payment/v1/**
+      service-id: payment-service
+    license-service:
+      path: /license/v1/**
+      service-id: license-service
+    language-service:
+      path: /language/v1/**
+      service-id: language-service
+  ignored-services: '*'
+  host:
+    connectTimeoutMillis: 30000
+    socket-timeout-millis: 30000
+  add-host-header: true
+  sensitive-headers:
+
+ribbon:
+  ConnectTimeout: 60000
+  ReadTimeout: 80000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 280000
+
+# eureka server url
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka
+    registry-fetch-interval-seconds: 20
+    availability-zones:
+      default: defaultZone
+    region: default
+    enabled: true
+  instance:
+    prefer-ip-address: true
+
+system-notification:
+  update-auth-info:
+    exchange-name: system-notification-update-auth-info
+
+security:
+  properties:
+    checkApplicationId: http://permission-service/application/check
+    checkAccessUrl: http://account-service/auth/check
+    applicationIdHeader: Application-Id
+    applicationIdHeaderRequired: true
+    notRequiredApplicationIdHosts: status, swagger-ui.html.*, .*/api-docs, .*\/springfox-swagger-ui\/.*, swagger-resources.*
+    bearerHeader: Authorization
+    bearerPrefix: Bearer
+    jwtHeader: Service-Authorization
+    jwtPrefix: JWT
+    jwtSecret: CnfxFqbCKHLqzT9LGruE
+    endpointKeeperEnable: false
+    getUserGroupUrl: http://permission-service/group-user/my-group
+    getPermissionMapUrl: http://permission-service/group/permission-map/by-group

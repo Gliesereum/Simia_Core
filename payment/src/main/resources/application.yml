@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: payment-service
+
+db:
+  schema: payment
+
+server:
+  port: 8280
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /api-docs
+
+module-url: /payment/v1
+
+
+security:
+  properties:
+    jwtHeader: Service-Authorization
+    jwtPrefix: JWT
+    jwtSecret: CnfxFqbCKHLqzT9LGruE
+
+# eureka server url
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka
+    registry-fetch-interval-seconds: 20
+    availability-zones:
+      default: defaultZone
+    region: default
+    enabled: true
+  instance:
+    prefer-ip-address: true
+
+exchange:
+  endpoint:
+    account:
+      findPublicUserByUserIds: http://account-service/user/public/by-ids
+
+way-for-pay:
+  url:
+    api: https://api.wayforpay.com/api
+    verify: https://secure.wayforpay.com/verify
+    verify-response: https://8f008257.ngrok.io/card/way-for-pay/verify-response
+    purchase-response: https://8f008257.ngrok.io/payment/way-for-pay/purchase-response
+  merchant:
+    #key: 6c7018b67af807221b14e3e472e1cf57731f9dbd
+    #account: coupler_app
+    #domain: https://coupler.app/
+    key: flk3409refn54t54t*FNJRET
+    account: test_merch_n1
+    domain: merchant.com.ua
+  exchange:
+    order-update-status-payment-info:
+      exchange-name: order-update-status-payment-info
+    business-update-type-payment:
+      exchange-name: business-update-type-payment
+
+liq-pay:
+  checkout:
+    callback-server-url: https://32bff33b.ngrok.io/liq-pay/call-back
+  public-key: sandbox_i68717225710
+  private-key: sandbox_MbnwJt32pvmXEFielzRaM2gYB4tauUmpYM4a3qFs

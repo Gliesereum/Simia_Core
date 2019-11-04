@@ -1,0 +1,68 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${db.host}:${db.port}/${db.database}
+    username: ${db.username}
+    password: ${db.password}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_schema: ${db.schema}
+        temp:
+          use_jdbc_metadata_defaults: false
+    show-sql: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/all
+    baseline-version: 1
+    sql-migration-suffixes: .sql
+    sql-migration-prefix: V
+    schemas: ${db.schema}
+
+  mail:
+    default-encoding: UTF-8
+    host: ${mail.host}
+    username: ${mail.username}
+    password: ${mail.password}
+    from: ${mail.from}
+    subject: ${mail.subject}
+    chanel-verification: verificationQueue
+    log-email: ${mail.log-email}
+    port: 465
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+          ssl:
+            enable: true
+            trust: "*"
+
+  rabbitmq:
+    host: ${rabbit.host}
+    port: ${rabbit.port}
+    password: ${rabbit.password}
+    username: ${rabbit.user}
+    connection-timeout: 5s
+    queue-logstash-system: ${LOG_SYSTEM_QUEUE}
+    queue-logstash-request: ${LOG_REQUEST_QUEUE}
+
+phone:
+  acemount:
+    url: https://api.acemountmedia.com/sms/
+    alpha-name: ${phone.acemount.api.alpha}
+    token: ${phone.acemount.api.token}
+  mobizon:
+    url: https://api.mobizon.ua/service/
+    token: ${phone.mobizon.api.token}
+  sendSms : ${phone.send-sms:true}
+
+

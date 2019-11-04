@@ -1,0 +1,81 @@
+spring:
+  application:
+    name: notification-service
+  mvc:
+    logResolvedException: false
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+  main:
+    allow-bean-definition-overriding: true
+
+module-url: /notification/v1
+
+server:
+  port: 8270
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /api-docs
+
+db:
+  schema: notification
+
+security:
+  properties:
+    jwtHeader: Service-Authorization
+    jwtPrefix: JWT
+    jwtSecret: CnfxFqbCKHLqzT9LGruE
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka
+    registry-fetch-interval-seconds: 20
+    availability-zones:
+      default: defaultZone
+    region: default
+    enabled: true
+  instance:
+    prefer-ip-address: true
+
+exchange:
+  endpoint:
+    permission:
+      endpointUpdatePack: http://permission-service/endpoint/pack
+    account:
+      userIsExist: http://account-service/user/exist
+      findByIds: http://account-service/user/by-ids
+      sendCode: http://account-service/phone/code
+      userAuth: http://account-service/auth/signin
+      createOrGetPublicUser: http://account-service/user/public/create-or-get
+    karma:
+      businessForCurrentUser: http://karma-service/business/by-current-user/like-worker
+      existChatSupport: http://karma-service/chat-support/exist-chat-support
+
+firebase:
+  properties:
+    credentialPath: classpath:google-services.json
+    appName: coupler-13
+
+notification:
+  record:
+    queueName: notification-record
+  create-record:
+    queueName: notification-create-record
+  business:
+    queueName: notification-business
+  chat-message:
+    queueName: notification-chat-message
+  lg:
+    create-offer:
+      queueName: notification-lg-create-offer
+    
+telegram:
+  bot:
+    token: ${telegram.bot.notification.token:962353680:AAEeLbmbr6V_ibcovqaY6n0KOc_vkK0PQUg}
+    user-name: ${telegram.bot.notification.username:coupler_worker_dev_bot}
+#    token: ${telegram.bot.notification.token:831595784:AAF0qpFXzS4QvpIMk89YFgMpsLcOR5jEh-o}
+#    user-name: ${telegram.bot.notification.username:coupler_worker_bot}

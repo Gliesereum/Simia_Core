@@ -1,0 +1,9 @@
+spring:
+  rabbitmq:
+    host: ${rabbit.host}
+    port: ${rabbit.port}
+    password: ${rabbit.password}
+    username: ${rabbit.user}
+    connection-timeout: 5s
+    queue-logstash-system: ${LOG_SYSTEM_QUEUE}
+    queue-logstash-request: ${LOG_REQUEST_QUEUE}
