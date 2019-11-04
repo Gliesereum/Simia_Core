@@ -1,13 +1,13 @@
-package com.gliesereum.socket.config;
+package com.simia.socket.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gliesereum.share.common.exchange.service.auth.AuthExchangeService;
-import com.gliesereum.share.common.exchange.service.auth.impl.AuthExchangeServiceImpl;
-import com.gliesereum.share.common.security.bearer.filter.BearerAuthenticationFilter;
-import com.gliesereum.share.common.security.handler.ExceptionHandlerFilter;
-import com.gliesereum.share.common.security.jwt.factory.JwtTokenFactory;
-import com.gliesereum.share.common.security.jwt.factory.impl.JwtTokenFactoryImpl;
-import com.gliesereum.share.common.security.properties.SecurityProperties;
+import com.simia.share.common.exchange.service.auth.AuthExchangeService;
+import com.simia.share.common.exchange.service.auth.impl.AuthExchangeServiceImpl;
+import com.simia.share.common.security.bearer.filter.BearerAuthenticationFilter;
+import com.simia.share.common.security.handler.ExceptionHandlerFilter;
+import com.simia.share.common.security.jwt.factory.JwtTokenFactory;
+import com.simia.share.common.security.jwt.factory.impl.JwtTokenFactoryImpl;
+import com.simia.share.common.security.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

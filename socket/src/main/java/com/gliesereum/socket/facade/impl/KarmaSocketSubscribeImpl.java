@@ -1,12 +1,12 @@
-package com.gliesereum.socket.facade.impl;
+package com.simia.socket.facade.impl;
 
-import com.gliesereum.share.common.exception.client.ClientException;
-import com.gliesereum.share.common.exchange.service.karma.KarmaExchangeService;
-import com.gliesereum.share.common.model.dto.karma.business.BaseBusinessDto;
-import com.gliesereum.share.common.util.RegexUtil;
-import com.gliesereum.share.common.util.SecurityUtil;
-import com.gliesereum.socket.facade.SocketSubscribeFacade;
-import com.gliesereum.socket.model.subscribe.SubscribeInfo;
+import com.simia.share.common.exception.client.ClientException;
+import com.simia.share.common.exchange.service.karma.KarmaExchangeService;
+import com.simia.share.common.model.dto.karma.business.BaseBusinessDto;
+import com.simia.share.common.util.RegexUtil;
+import com.simia.share.common.util.SecurityUtil;
+import com.simia.socket.facade.SocketSubscribeFacade;
+import com.simia.socket.model.subscribe.SubscribeInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
-import static com.gliesereum.share.common.exception.messages.CommonExceptionMessage.USER_IS_ANONYMOUS;
-import static com.gliesereum.share.common.exception.messages.SocketExceptionMessage.*;
+import static com.simia.share.common.exception.messages.CommonExceptionMessage.USER_IS_ANONYMOUS;
+import static com.simia.share.common.exception.messages.SocketExceptionMessage.*;
 
 /**
  * @author yvlasiuk

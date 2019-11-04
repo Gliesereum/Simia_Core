@@ -4,7 +4,7 @@
     <property name="PATTERN_STDOUT"
               value="%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"/>
 
-    <appender name="LOGGING_APPENDER" class="com.gliesereum.share.common.logging.appender.LoggingAppender"/>
+    <appender name="LOGGING_APPENDER" class="com.simia.share.common.logging.appender.LoggingAppender"/>
 
     <root level="INFO">
         <appender-ref ref="LOGGING_APPENDER"/>
