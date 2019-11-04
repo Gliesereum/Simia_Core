@@ -1,6 +1,6 @@
-package com.gliesereum.socket.config;
+package com.simia.socket.config;
 
-import com.gliesereum.share.common.config.logging.LoggingDefaultConfiguration;
+import com.simia.share.common.config.logging.LoggingDefaultConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 

@@ -1,8 +1,8 @@
-package com.gliesereum.socket.config.interceptor;
+package com.simia.socket.config.interceptor;
 
-import com.gliesereum.share.common.security.jwt.factory.JwtTokenFactory;
-import com.gliesereum.share.common.security.properties.SecurityProperties;
-import com.gliesereum.share.common.util.SecurityUtil;
+import com.simia.share.common.security.jwt.factory.JwtTokenFactory;
+import com.simia.share.common.security.properties.SecurityProperties;
+import com.simia.share.common.util.SecurityUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;

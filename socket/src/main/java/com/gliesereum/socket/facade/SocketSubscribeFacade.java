@@ -1,6 +1,6 @@
-package com.gliesereum.socket.facade;
+package com.simia.socket.facade;
 
-import com.gliesereum.socket.model.subscribe.SubscribeInfo;
+import com.simia.socket.model.subscribe.SubscribeInfo;
 
 /**
  * @author yvlasiuk
