@@ -30,7 +30,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.gliesereum'
+group = 'com.simia'
 version = '0.1.4'
 sourceCompatibility = 11
 

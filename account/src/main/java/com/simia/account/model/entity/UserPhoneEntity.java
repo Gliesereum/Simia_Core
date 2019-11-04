@@ -1,0 +1,27 @@
+package com.simia.account.model.entity;
+
+import com.simia.share.common.model.entity.DefaultEntity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.UUID;
+
+/**
+ * @author vitalij
+ */
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "user_phone")
+public class UserPhoneEntity extends DefaultEntity {
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "user_id")
+    private UUID userId;
+
+}

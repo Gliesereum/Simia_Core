@@ -1,6 +1,6 @@
-package com.gliesereum.socket;
+package com.simia.socket;
 
-import com.gliesereum.share.common.security.properties.SecurityProperties;
+import com.simia.share.common.security.properties.SecurityProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

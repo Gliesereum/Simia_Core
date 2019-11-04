@@ -1,14 +1,14 @@
-package com.gliesereum.socket.config.socket;
+package com.simia.socket.config.socket;
 
-import com.gliesereum.share.common.exception.CustomException;
-import com.gliesereum.share.common.exception.client.ClientException;
-import com.gliesereum.share.common.exchange.service.auth.AuthExchangeService;
-import com.gliesereum.share.common.model.dto.account.auth.AuthDto;
-import com.gliesereum.share.common.security.model.UserAuthentication;
-import com.gliesereum.share.common.security.properties.SecurityProperties;
-import com.gliesereum.socket.facade.SocketSubscribeFacade;
-import com.gliesereum.socket.model.subscribe.SubscribeInfo;
-import com.gliesereum.socket.model.subscribe.SubscribePoint;
+import com.simia.share.common.exception.CustomException;
+import com.simia.share.common.exception.client.ClientException;
+import com.simia.share.common.exchange.service.auth.AuthExchangeService;
+import com.simia.share.common.model.dto.account.auth.AuthDto;
+import com.simia.share.common.security.model.UserAuthentication;
+import com.simia.share.common.security.properties.SecurityProperties;
+import com.simia.socket.facade.SocketSubscribeFacade;
+import com.simia.socket.model.subscribe.SubscribeInfo;
+import com.simia.socket.model.subscribe.SubscribePoint;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
-import static com.gliesereum.share.common.exception.messages.SocketExceptionMessage.*;
+import static com.simia.share.common.exception.messages.SocketExceptionMessage.*;
 
 /**
  * @author yvlasiuk

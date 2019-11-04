@@ -1,4 +1,4 @@
-package com.gliesereum.socket.model.subscribe;
+package com.simia.socket.model.subscribe;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

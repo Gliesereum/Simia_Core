@@ -1,4 +1,4 @@
-package com.gliesereum.socket.config.socket;
+package com.simia.socket.config.socket;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
