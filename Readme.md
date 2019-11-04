@@ -1,4 +1,4 @@
-# Gliesereum platform
+# Simka platform
 
 ### Build jar's
 
