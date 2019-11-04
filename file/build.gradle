@@ -1,15 +1,15 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.5.RELEASE'
-		springCloudVersion = 'Greenwich.SR1'
-		modelMapperVersion = '2.3.0'
+		springBootVersion = '2.2.0.RELEASE'
+		springCloudVersion = 'Greenwich.SR3'
+		modelMapperVersion = '2.3.5'
 		jjwtVersion = '0.9.1'
-		commonsCollectionsVersion = '4.2'
-		commonsLangVersion = '3.8.1'
+		commonsCollectionsVersion = '4.4'
+		commonsLangVersion = '3.9'
 		commonsIOVersion = '2.6'
-		lombokVersion = '1.18.2'
+		lombokVersion = '1.18.10'
 		logbackVersion = '1.2.3'
-		awsVersion = '1.11.475'
+		awsVersion = '1.11.665'
 		swaggerVersion = '2.9.2'
 	}
 	repositories {
