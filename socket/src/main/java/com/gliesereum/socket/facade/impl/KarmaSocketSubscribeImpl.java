@@ -2,7 +2,7 @@ package com.simia.socket.facade.impl;
 
 import com.simia.share.common.exception.client.ClientException;
 import com.simia.share.common.exchange.service.karma.KarmaExchangeService;
-import com.simia.share.common.model.dto.karma.business.BaseBusinessDto;
+import com.simia.share.common.model.dto.expert.business.BaseBusinessDto;
 import com.simia.share.common.util.RegexUtil;
 import com.simia.share.common.util.SecurityUtil;
 import com.simia.socket.facade.SocketSubscribeFacade;

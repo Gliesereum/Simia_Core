@@ -1,6 +1,6 @@
 package com.simia.share.common.exchange.service.karma;
 
-import com.simia.share.common.model.dto.karma.business.BaseBusinessDto;
+import com.simia.share.common.model.dto.expert.business.BaseBusinessDto;
 
 import java.util.List;
 import java.util.UUID;

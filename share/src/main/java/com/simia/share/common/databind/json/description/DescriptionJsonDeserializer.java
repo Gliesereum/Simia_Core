@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
 import com.simia.share.common.model.dto.base.description.BaseDescriptionDto;
-import com.simia.share.common.model.dto.karma.enumerated.LanguageCode;
+import com.simia.share.common.model.dto.expert.enumerated.LanguageCode;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 

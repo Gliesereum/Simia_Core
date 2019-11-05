@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.simia.share.common.model.dto.base.description.BaseDescriptionDto;
-import com.simia.share.common.model.dto.karma.enumerated.LanguageCode;
+import com.simia.share.common.model.dto.expert.enumerated.LanguageCode;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.io.IOException;

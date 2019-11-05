@@ -1,7 +1,7 @@
 package com.simia.share.common.model.dto.base.description;
 
 import com.simia.share.common.model.dto.DefaultDto;
-import com.simia.share.common.model.dto.karma.enumerated.LanguageCode;
+import com.simia.share.common.model.dto.expert.enumerated.LanguageCode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

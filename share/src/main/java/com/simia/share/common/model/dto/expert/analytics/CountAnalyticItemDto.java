@@ -1,0 +1,31 @@
+package com.simia.share.common.model.dto.expert.analytics;
+
+import com.simia.share.common.model.dto.DefaultDto;
+import com.simia.share.common.model.dto.expert.record.BaseRecordDto;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Set;
+import java.util.UUID;
+
+/**
+ * @author yvlasiuk
+ * @version 1.0
+ */
+
+@Data
+@NoArgsConstructor
+public class CountAnalyticItemDto<T extends DefaultDto> {
+
+    private UUID id;
+
+    private String name;
+
+    private T object;
+
+    private Integer recordCount;
+
+    private Double usagePercent;
+
+    private Set<BaseRecordDto> records;
+}

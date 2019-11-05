@@ -1,0 +1,16 @@
+package com.simia.share.common.model.dto.expert.business.group;
+
+import com.simia.share.common.model.dto.expert.business.document.BusinessDocumentDto;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class BusinessGroupListItemDto {
+    
+    private BusinessDocumentDto business;
+    
+    private Object object;
+    
+    private Long count;
+}

@@ -2,10 +2,10 @@ package com.simia.notification.mq;
 
 import com.simia.notification.bot.NotificationTelegramBotService;
 import com.simia.notification.service.notification.KarmaNotificationService;
-import com.simia.share.common.model.dto.karma.business.AbstractBusinessDto;
-import com.simia.share.common.model.dto.karma.chat.ChatMessageDto;
-import com.simia.share.common.model.dto.karma.record.BaseRecordDto;
-import com.simia.share.common.model.dto.karma.record.RecordNotificationDto;
+import com.simia.share.common.model.dto.expert.business.AbstractBusinessDto;
+import com.simia.share.common.model.dto.expert.chat.ChatMessageDto;
+import com.simia.share.common.model.dto.expert.record.BaseRecordDto;
+import com.simia.share.common.model.dto.expert.record.RecordNotificationDto;
 import com.simia.share.common.model.dto.notification.notification.NotificationDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.Queue;

@@ -1,0 +1,89 @@
+spring:
+  application:
+    name: karma-service
+  mvc:
+    logResolvedException: false
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+  main:
+    allow-bean-definition-overriding: true
+
+module-url: /karma/v1
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /api-docs
+
+server:
+  port: 8240
+
+db:
+  schema: karma
+
+security:
+  properties:
+    jwtHeader: Service-Authorization
+    jwtPrefix: JWT
+    jwtSecret: CnfxFqbCKHLqzT9LGruE
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka
+    registry-fetch-interval-seconds: 20
+    availability-zones:
+      default: defaultZone
+    region: default
+    enabled: true
+  instance:
+    prefer-ip-address: true
+
+exchange:
+  endpoint:
+    permission:
+      endpointUpdatePack: http://permission-service/endpoint/pack
+      addUserByGroupPurpose: http://permission-service/group-user/by-group-purpose
+    account:
+      userIsExist: http://account-service/user/exist
+      findByIds: http://account-service/user/by-ids
+      getByPhone: http://account-service/user/by-phone
+      findPublicUserByUserIds: http://account-service/user/public/by-ids
+      createOrGetPublicUser: http://account-service/user/public/create-or-get
+      findUserPhonesByUserIds: http://account-service/phone/by-user-ids
+      publicStatistic: http://account-service/statistic/public
+    mail:
+      emailVerification: http://mail-service/email/verification
+      sentEmail: http://mail-service/email/single
+      phoneVerification: http://mail-service/phone/single
+      sendPhone: http://mail-service/phone/single
+
+notification:
+  record:
+    queueName: notification-record
+  create-record:
+    queueName: notification-create-record
+  business:
+    queueName: notification-business
+  chat-message:
+    queueName: notification-chat-message
+
+system-notification:
+  corporation-delete:
+    exchange-name: system-notification-corporation-delete
+  signup-with-code:
+    exchange-name: system-notification-signup-with-code
+    queue-name: signup-with-code-${spring.application.name}-queue
+  update-client-info:
+    exchange-name: system-notification-update-client-info
+    queue-name: update-client-info-${spring.application.name}-queue
+
+
+image-url:
+  user:
+    avatar: https://glcdn.sgp1.digitaloceanspaces.com/coupler/Avatar.png
+  business:
+    logo: https://glcdn.sgp1.digitaloceanspaces.com/coupler/Avatar.png
+    cover: https://glcdn.sgp1.digitaloceanspaces.com/coupler/Cover.png

@@ -2,7 +2,7 @@ package com.simia.share.common.exchange.service.karma.impl;
 
 import com.simia.share.common.exchange.properties.ExchangeProperties;
 import com.simia.share.common.exchange.service.karma.KarmaExchangeService;
-import com.simia.share.common.model.dto.karma.business.BaseBusinessDto;
+import com.simia.share.common.model.dto.expert.business.BaseBusinessDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;

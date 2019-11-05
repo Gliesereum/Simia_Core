@@ -1,7 +1,7 @@
 package com.simia.notification.controller;
 
 import com.simia.notification.service.notification.KarmaNotificationService;
-import com.simia.share.common.model.dto.karma.record.BaseRecordDto;
+import com.simia.share.common.model.dto.expert.record.BaseRecordDto;
 import com.simia.share.common.model.dto.notification.enumerated.SubscribeDestination;
 import com.simia.share.common.model.dto.notification.notification.NotificationDto;
 import org.springframework.beans.factory.annotation.Autowired;

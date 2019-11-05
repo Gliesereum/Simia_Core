@@ -1,6 +1,6 @@
 package com.simia.share.common.model.entity.description;
 
-import com.simia.share.common.model.dto.karma.enumerated.LanguageCode;
+import com.simia.share.common.model.dto.expert.enumerated.LanguageCode;
 import com.simia.share.common.model.entity.DefaultEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

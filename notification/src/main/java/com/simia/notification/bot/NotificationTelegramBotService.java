@@ -1,6 +1,6 @@
 package com.simia.notification.bot;
 
-import com.simia.share.common.model.dto.karma.record.RecordNotificationDto;
+import com.simia.share.common.model.dto.expert.record.RecordNotificationDto;
 
 public interface NotificationTelegramBotService {
 	

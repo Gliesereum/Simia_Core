@@ -8,7 +8,7 @@ import com.simia.notification.service.subscribe.UserSubscribeService;
 import com.simia.share.common.converter.DefaultConverter;
 import com.simia.share.common.exception.client.ClientException;
 import com.simia.share.common.exchange.service.karma.KarmaExchangeService;
-import com.simia.share.common.model.dto.karma.business.BaseBusinessDto;
+import com.simia.share.common.model.dto.expert.business.BaseBusinessDto;
 import com.simia.share.common.model.dto.notification.device.UserDeviceDto;
 import com.simia.share.common.model.dto.notification.device.UserDeviceRegistrationDto;
 import com.simia.share.common.model.dto.notification.enumerated.SubscribeDestination;
