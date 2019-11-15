@@ -1,8 +1,7 @@
-package com.simia.expert.controller.tag;
+package com.simia.expert.controller.certificate;
 
-import com.simia.expert.service.tag.TagService;
-import com.simia.share.common.model.dto.expert.enumerated.TagType;
-import com.simia.share.common.model.dto.expert.tag.TagDto;
+import com.simia.expert.service.certificate.CertificateService;
+import com.simia.share.common.model.dto.expert.certificate.CertificateDto;
 import com.simia.share.common.model.response.MapResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,29 +11,24 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/tag")
-public class TagController {
+@RequestMapping("/certificate")
+public class CertificateController {
 
     @Autowired
-    private TagService service;
-
-    @GetMapping
-    public List<TagDto> getAll() {
-        return service.getAll();
-    }
+    private CertificateService service;
 
     @GetMapping("/{id}")
-    public TagDto getById(@PathVariable("id") UUID id) {
+    public CertificateDto getById(@PathVariable("id") UUID id) {
         return service.getById(id);
     }
 
     @PostMapping
-    public TagDto create(@Valid @RequestBody TagDto dto) {
+    public CertificateDto create(@Valid @RequestBody CertificateDto dto) {
         return service.create(dto);
     }
 
     @PutMapping
-    public TagDto update(@Valid @RequestBody TagDto dto) {
+    public CertificateDto update(@Valid @RequestBody CertificateDto dto) {
         return service.update(dto);
     }
 

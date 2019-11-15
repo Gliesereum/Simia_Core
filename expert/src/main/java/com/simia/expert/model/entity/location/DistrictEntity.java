@@ -14,19 +14,10 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Table(name = "district")
 public class DistrictEntity extends DefaultEntity {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "city_id")
-    private UUID cityId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id", insertable = false, updatable = false)
-    private CityEntity city;
 
     @OneToMany
     @JoinColumn(name = "object_id", insertable = false, updatable = false)

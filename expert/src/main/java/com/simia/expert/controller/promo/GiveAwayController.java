@@ -1,8 +1,7 @@
-package com.simia.expert.controller.tag;
+package com.simia.expert.controller.promo;
 
-import com.simia.expert.service.tag.TagService;
-import com.simia.share.common.model.dto.expert.enumerated.TagType;
-import com.simia.share.common.model.dto.expert.tag.TagDto;
+import com.simia.expert.service.promo.GiveAwayService;
+import com.simia.share.common.model.dto.expert.promo.GiveAwayDto;
 import com.simia.share.common.model.response.MapResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,29 +11,24 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/tag")
-public class TagController {
+@RequestMapping("/give-away")
+public class GiveAwayController {
 
     @Autowired
-    private TagService service;
-
-    @GetMapping
-    public List<TagDto> getAll() {
-        return service.getAll();
-    }
+    private GiveAwayService service;
 
     @GetMapping("/{id}")
-    public TagDto getById(@PathVariable("id") UUID id) {
+    public GiveAwayDto getById(@PathVariable("id") UUID id) {
         return service.getById(id);
     }
 
     @PostMapping
-    public TagDto create(@Valid @RequestBody TagDto dto) {
+    public GiveAwayDto create(@Valid @RequestBody GiveAwayDto dto) {
         return service.create(dto);
     }
 
     @PutMapping
-    public TagDto update(@Valid @RequestBody TagDto dto) {
+    public GiveAwayDto update(@Valid @RequestBody GiveAwayDto dto) {
         return service.update(dto);
     }
 
@@ -45,3 +39,4 @@ public class TagController {
     }
 
 }
+

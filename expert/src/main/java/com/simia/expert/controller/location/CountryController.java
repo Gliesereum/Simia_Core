@@ -44,8 +44,4 @@ public class CountryController {
         return new MapResponse("true");
     }
 
-    @PostMapping("add-geo-position/{id}")
-    public CountryDto addGeoPoints(@PathVariable("id") UUID id, @RequestBody List<GeoPositionDto> positions) {
-        return service.addGeoPosition(positions, id);
-    }
 }

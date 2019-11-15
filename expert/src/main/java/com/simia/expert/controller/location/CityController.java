@@ -44,8 +44,4 @@ public class CityController {
         return new MapResponse("true");
     }
 
-    @PostMapping("add-geo-position/{id}")
-    public CityDto addGeoPoints(@PathVariable("id") UUID id, @RequestBody List<GeoPositionDto> positions) {
-        return service.addGeoPosition(positions, id);
-    }
 }

@@ -1,4 +1,4 @@
-package com.simia.expert.model.entity.tag;
+package com.simia.expert.model.entity.followers;
 
 import com.simia.share.common.model.entity.AuditableDefaultEntity;
 import lombok.Data;
@@ -8,14 +8,17 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.UUID;
 
 
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class TagEntity extends AuditableDefaultEntity {
+public class FollowerEntity extends AuditableDefaultEntity {
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "user_id")
+    private UUID userId;
 
+    @Column(name = "expert_id")
+    private UUID expertId;
 }
