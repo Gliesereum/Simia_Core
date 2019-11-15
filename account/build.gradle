@@ -55,7 +55,9 @@ dependencies {
 	implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
 
 	compileOnly "org.springframework.boot:spring-boot-configuration-processor"
-	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	
+	compileOnly ("org.projectlombok:lombok:${lombokVersion}")
+	annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 
 	testImplementation "ch.qos.logback:logback-classic:${logbackVersion}"
 

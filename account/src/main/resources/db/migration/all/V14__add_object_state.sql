@@ -1,1 +1,0 @@
-ALTER TABLE account.corporation ADD COLUMN object_state character varying DEFAULT 'ACTIVE';

@@ -2,7 +2,6 @@ package com.simia.account.facade.notification;
 
 import com.simia.share.common.model.dto.account.auth.AuthDto;
 import com.simia.share.common.model.dto.account.referral.ReferralCodeUserDto;
-import com.simia.share.common.model.dto.account.user.CorporationDto;
 import com.simia.share.common.model.dto.account.user.UserDto;
 
 import java.util.List;
@@ -12,8 +11,6 @@ import java.util.List;
  * @version 1.0
  */
 public interface SystemNotificationFacade {
-
-    void sendCorporationDelete(CorporationDto corporation);
 
     void sendSignUpWithCodeNotification(ReferralCodeUserDto referralCodeUser);
 

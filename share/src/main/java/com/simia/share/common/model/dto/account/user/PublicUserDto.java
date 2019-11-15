@@ -19,9 +19,7 @@ public class PublicUserDto extends DefaultDto {
     private String firstName;
 
     private String lastName;
-
-    private String middleName;
-
+    
     private String phone;
 
     private String email;

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -48,7 +49,9 @@ public class AuditableServiceImpl<D extends AuditableDefaultDto, E extends Audit
     public List<D> getByIds(Iterable<UUID> ids, ObjectState objectState) {
         List<D> result = null;
         if (ObjectUtils.allNotNull(ids, objectState)) {
-            List<E> entites = auditableRepository.findByIdInAndObjectState(ids, objectState);
+            List<UUID> list = new ArrayList<>();
+            ids.forEach(list::add);
+            List<E> entites = auditableRepository.findByIdInAndObjectState(list, objectState);
             result = converter.convert(entites, dtoClass);
         }
         return result;

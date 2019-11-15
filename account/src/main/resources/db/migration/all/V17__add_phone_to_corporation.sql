@@ -1,1 +1,0 @@
-ALTER TABLE account.corporation ADD COLUMN phone character varying;

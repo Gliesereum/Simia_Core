@@ -7,7 +7,7 @@ buildscript {
 		commonsIOVersion = '2.6'
 		modelMapperVersion = '2.3.5'
 		jjwtVersion = '0.9.1'
-		lombokVersion = '1.18.10'
+		lombokVersion = '1.18.2'
 		swaggerVersion = '2.9.2'
 		firebaseAdminVersion = '6.11.0'
 		telegramBotVersion = '4.4.0.1'
@@ -57,7 +57,9 @@ dependencies {
 	runtimeOnly('org.postgresql:postgresql')
 	
 	compileOnly "org.springframework.boot:spring-boot-configuration-processor"
-	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+
+	compileOnly ("org.projectlombok:lombok:${lombokVersion}")
+	annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
 	
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 

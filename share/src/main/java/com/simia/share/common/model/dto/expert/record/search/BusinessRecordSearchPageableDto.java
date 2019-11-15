@@ -1,6 +1,7 @@
 package com.simia.share.common.model.dto.expert.record.search;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Sort;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.Min;
  */
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class BusinessRecordSearchPageableDto extends BusinessRecordSearchDto {
 
     @Min(0)

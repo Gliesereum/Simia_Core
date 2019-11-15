@@ -19,8 +19,6 @@ public interface UserService extends AuditableService<UserDto, UserEntity> {
 
     UserDto updateMe(UserDto dto);
 
-    void setKycApproved(UUID objectId);
-
     UserDto getByPhone(String phone);
 
     void updateAsync(UserDto user);

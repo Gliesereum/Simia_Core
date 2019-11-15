@@ -2,6 +2,7 @@ package com.simia.share.common.model.dto.expert.client;
 
 import com.simia.share.common.model.dto.AuditableDefaultDto;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class ClientDto extends AuditableDefaultDto {
 
     private UUID userId;

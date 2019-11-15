@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,7 +22,7 @@ public interface AuditableRepository<T extends AuditableDefaultEntity> extends J
 
     Optional<T> findByIdAndObjectState(UUID id, ObjectState objectState);
 
-    List<T> findByIdInAndObjectState(Iterable<UUID> ids, ObjectState objectState);
+    List<T> findByIdInAndObjectState(Collection<UUID> ids, ObjectState objectState);
 
     List<T> findByObjectState(ObjectState objectState);
 

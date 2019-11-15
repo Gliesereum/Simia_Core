@@ -4,6 +4,7 @@ import com.simia.expert.model.entity.media.MediaEntity;
 import com.simia.share.common.model.dto.expert.media.MediaDto;
 import com.simia.share.common.model.dto.expert.media.MediaListUpdateDto;
 import com.simia.share.common.service.DefaultService;
+import com.simia.share.common.service.auditable.AuditableService;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.UUID;
  * @author yvlasiuk
  * @version 1.0
  */
-public interface MediaService extends DefaultService<MediaDto, MediaEntity> {
+public interface MediaService extends AuditableService<MediaDto, MediaEntity> {
 
     List<MediaDto> getByObjectId(UUID objectId);
 

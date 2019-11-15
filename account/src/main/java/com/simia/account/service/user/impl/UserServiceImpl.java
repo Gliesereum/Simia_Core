@@ -4,7 +4,6 @@ import com.simia.account.facade.auth.UserUpdateFacade;
 import com.simia.account.facade.referral.ReferralFacade;
 import com.simia.account.model.entity.UserEntity;
 import com.simia.account.model.repository.jpa.user.UserRepository;
-import com.simia.account.service.user.CorporationSharedOwnershipService;
 import com.simia.account.service.user.UserEmailService;
 import com.simia.account.service.user.UserPhoneService;
 import com.simia.account.service.user.UserService;
@@ -67,9 +66,6 @@ public class UserServiceImpl extends AuditableServiceImpl<UserDto, UserEntity> i
     private UserPhoneService phoneService;
 
     @Autowired
-    private CorporationSharedOwnershipService corporationSharedOwnershipService;
-
-    @Autowired
     private ReferralFacade referralFacade;
 
     @Autowired
@@ -97,7 +93,6 @@ public class UserServiceImpl extends AuditableServiceImpl<UserDto, UserEntity> i
         if (dto != null) {
             setLogoIfNull(dto);
             dto.setBanStatus(BanStatus.UNBAN);
-            dto.setKycApproved(false);
             result = super.create(dto);
         }
         return result;
@@ -129,7 +124,6 @@ public class UserServiceImpl extends AuditableServiceImpl<UserDto, UserEntity> i
             UserDto newUser = new UserDto();
             newUser.setFirstName(publicUser.getFirstName());
             newUser.setLastName(publicUser.getLastName());
-            newUser.setMiddleName(publicUser.getMiddleName());
             newUser.setAvatarUrl(publicUser.getAvatarUrl());
             newUser.setGender(publicUser.getGender());
             newUser = create(newUser);
@@ -206,7 +200,6 @@ public class UserServiceImpl extends AuditableServiceImpl<UserDto, UserEntity> i
     public UserDto getById(UUID id) {
         UserDto byId = super.getByIdAndObjectState(id, ObjectState.ACTIVE);
         if (byId != null) {
-            byId.setCorporationIds(corporationSharedOwnershipService.getAllCorporationIdByUserId(byId.getId()));
             byId.setPhone(phoneService.getPhoneByUserId(byId.getId()));
         }
         return byId;
@@ -217,31 +210,17 @@ public class UserServiceImpl extends AuditableServiceImpl<UserDto, UserEntity> i
         List<UserDto> byIds = super.getByIds(ids, ObjectState.ACTIVE);
         if (CollectionUtils.isNotEmpty(byIds)) {
             List<UUID> userIds = IteratorUtils.toList(ids.iterator());
-            Map<UUID, List<UUID>> corporationsIds = corporationSharedOwnershipService.getAllCorporationIdByUserIds(userIds);
             Map<UUID, String> phones = phoneService.getPhoneByUserIds(userIds);
             byIds.forEach(i -> {
                         if (MapUtils.isNotEmpty(phones)) {
                             i.setPhone(phones.get(i.getId()));
-                        }
-                        if (MapUtils.isNotEmpty(corporationsIds)) {
-                            i.setCorporationIds(corporationsIds.get(i.getId()));
                         }
                     }
             );
         }
         return byIds;
     }
-
-    @Override
-    public void setKycApproved(UUID objectId) {
-        UserDto user = super.getByIdAndObjectState(objectId, ObjectState.ACTIVE);
-        if (user == null) {
-            throw new ClientException(USER_NOT_FOUND);
-        }
-        user.setKycApproved(true);
-        super.update(user);
-        userUpdateFacade.tokenInfoUpdateEvent(Arrays.asList(user.getId()));
-    }
+    
 
     @Override
     public UserDto getByPhone(String phone) {

@@ -7,7 +7,7 @@ buildscript {
 		commonsIOVersion = '2.6'
 		modelMapperVersion = '2.3.5'
 		jjwtVersion = '0.9.1'
-		lombokVersion = '1.18.10'
+		lombokVersion = '1.18.2'
 		logbackVersion = '1.2.3'
 		swaggerVersion = '2.9.2'
 	}
@@ -52,7 +52,9 @@ dependencies {
 	implementation "commons-io:commons-io:${commonsIOVersion}"
 	implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
 
-	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	compileOnly ("org.projectlombok:lombok:${lombokVersion}")
+	annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+	
 	compileOnly "org.springframework.boot:spring-boot-configuration-processor"
 	testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 
