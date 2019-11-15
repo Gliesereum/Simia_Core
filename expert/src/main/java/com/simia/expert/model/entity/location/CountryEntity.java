@@ -13,8 +13,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Table(name = "country")
 public class CountryEntity extends DefaultEntity {
 
     @Column(name = "name")
@@ -22,9 +20,6 @@ public class CountryEntity extends DefaultEntity {
 
     @Column(name = "centre_latitude")
     private Double centreLatitude;
-
-    @Column(name = "centre_longitude")
-    private Double centreLongitude;
 
     @OneToMany
     @JoinColumn(name = "object_id", insertable = false, updatable = false)

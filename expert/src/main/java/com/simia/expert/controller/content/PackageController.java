@@ -1,8 +1,8 @@
-package com.simia.expert.controller.tag;
+package com.simia.expert.controller.content;
 
-import com.simia.expert.service.tag.TagService;
-import com.simia.share.common.model.dto.expert.enumerated.TagType;
-import com.simia.share.common.model.dto.expert.tag.TagDto;
+import com.simia.expert.service.content.PackageService;
+import com.simia.share.common.model.dto.expert.content.PackageDto;
+import com.simia.share.common.model.dto.expert.content.PackageFullDto;
 import com.simia.share.common.model.response.MapResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,29 +12,29 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/tag")
-public class TagController {
+@RequestMapping("/package")
+public class PackageController {
 
     @Autowired
-    private TagService service;
+    private PackageService service;
 
     @GetMapping
-    public List<TagDto> getAll() {
+    public List<PackageDto> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public TagDto getById(@PathVariable("id") UUID id) {
+    public PackageDto getById(@PathVariable("id") UUID id) {
         return service.getById(id);
     }
 
     @PostMapping
-    public TagDto create(@Valid @RequestBody TagDto dto) {
+    public PackageDto create(@Valid @RequestBody PackageDto dto) {
         return service.create(dto);
     }
 
     @PutMapping
-    public TagDto update(@Valid @RequestBody TagDto dto) {
+    public PackageDto update(@Valid @RequestBody PackageDto dto) {
         return service.update(dto);
     }
 

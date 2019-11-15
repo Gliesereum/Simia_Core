@@ -14,8 +14,6 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Table(name = "city")
 public class CityEntity extends DefaultEntity {
 
     @Column(name = "name")
@@ -23,12 +21,6 @@ public class CityEntity extends DefaultEntity {
 
     @Column(name = "centre_latitude")
     private Double centreLatitude;
-
-    @Column(name = "centre_longitude")
-    private Double centreLongitude;
-
-    @Column(name = "country_id")
-    private UUID countryId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", insertable = false, updatable = false)

@@ -44,13 +44,4 @@ public class DistrictController {
         return new MapResponse("true");
     }
 
-    @PostMapping("add-geo-position/{id}")
-    public DistrictDto addGeoPoints(@PathVariable("id") UUID id, @RequestBody List<GeoPositionDto> positions) {
-        return service.addGeoPosition(positions, id);
-    }
-
-    @GetMapping("/by-city-id")
-    public List<DistrictDto> getAllByCityId(@RequestParam(name = "cityId") UUID cityId) {
-        return service.getAllByCityId(cityId);
-    }
 }

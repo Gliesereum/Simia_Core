@@ -14,12 +14,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Table(name = "geo_position")
 public class GeoPositionEntity extends DefaultEntity {
 
-    @Column(name = "longitude")
-    private Double longitude;
 
     @Column(name = "latitude")
     private Double latitude;

@@ -1,8 +1,7 @@
-package com.simia.expert.controller.tag;
+package com.simia.expert.controller.category;
 
-import com.simia.expert.service.tag.TagService;
-import com.simia.share.common.model.dto.expert.enumerated.TagType;
-import com.simia.share.common.model.dto.expert.tag.TagDto;
+import com.simia.expert.service.category.CategoryService;
+import com.simia.share.common.model.dto.expert.category.CategoryDto;
 import com.simia.share.common.model.response.MapResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,29 +11,29 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/tag")
-public class TagController {
+@RequestMapping("/category")
+public class CategoryController {
 
     @Autowired
-    private TagService service;
+    private CategoryService service;
 
     @GetMapping
-    public List<TagDto> getAll() {
+    public List<CategoryDto> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public TagDto getById(@PathVariable("id") UUID id) {
+    public CategoryDto getById(@PathVariable("id") UUID id) {
         return service.getById(id);
     }
 
     @PostMapping
-    public TagDto create(@Valid @RequestBody TagDto dto) {
+    public CategoryDto create(@Valid @RequestBody CategoryDto dto) {
         return service.create(dto);
     }
 
     @PutMapping
-    public TagDto update(@Valid @RequestBody TagDto dto) {
+    public CategoryDto update(@Valid @RequestBody CategoryDto dto) {
         return service.update(dto);
     }
 
@@ -43,5 +42,4 @@ public class TagController {
         service.delete(id);
         return new MapResponse("true");
     }
-
 }
