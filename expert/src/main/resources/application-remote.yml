@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://46.101.182.178:26780/glsdev
+    url: jdbc:postgresql://46.101.182.178:26780/simia_db
     username: postgres
     password: GliesereumAdmin0013
   jpa:

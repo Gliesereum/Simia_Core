@@ -5,6 +5,7 @@ import com.simia.share.common.model.dto.expert.comment.CommentDto;
 import com.simia.share.common.model.dto.expert.comment.CommentFullDto;
 import com.simia.share.common.model.dto.expert.comment.RatingDto;
 import com.simia.share.common.service.DefaultService;
+import com.simia.share.common.service.auditable.AuditableService;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.UUID;
  * @author yvlasiuk
  * @version 1.0
  */
-public interface CommentService extends DefaultService<CommentDto, CommentEntity> {
+public interface CommentService extends AuditableService<CommentDto, CommentEntity> {
 
     List<CommentDto> findByObjectId(UUID objectId);
 

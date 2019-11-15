@@ -36,23 +36,9 @@ public class UserDto extends AuditableDefaultDto {
     @NotEmpty
     private String lastName;
 
-    @Size(min = 3)
-    @NotEmpty
-    private String middleName;
-
-    @Size(min = 3)
-    @NotEmpty
-    private String country;
-
-    @Size(min = 3)
-    @NotEmpty
-    private String city;
-
     @Size(min = 6)
     @NotEmpty
     private String address;
-
-    private String addAddress;
 
     private String avatarUrl;
 
@@ -61,8 +47,6 @@ public class UserDto extends AuditableDefaultDto {
     private Gender gender;
 
     private BanStatus banStatus;
-
-    private Boolean kycApproved;
 
     @JsonDeserialize(using = LocalDateTimeJsonDeserializer.class)
     @JsonSerialize(using = LocalDateTimeJsonSerializer.class)

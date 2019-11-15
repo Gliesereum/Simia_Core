@@ -3,7 +3,6 @@ package com.simia.account.facade.notification.impl;
 import com.simia.account.facade.notification.SystemNotificationFacade;
 import com.simia.share.common.model.dto.account.auth.AuthDto;
 import com.simia.share.common.model.dto.account.referral.ReferralCodeUserDto;
-import com.simia.share.common.model.dto.account.user.CorporationDto;
 import com.simia.share.common.model.dto.account.user.UserDto;
 import com.simia.share.common.model.dto.notification.notification.SystemNotificationDto;
 import org.apache.commons.collections4.CollectionUtils;
@@ -37,17 +36,6 @@ public class SystemNotificationFacadeImpl implements SystemNotificationFacade {
 
     @Autowired
     private FanoutExchange updateClientInfoExchange;
-
-    @Async
-    @Override
-    public void sendCorporationDelete(CorporationDto corporation) {
-        if ((corporation != null) && (corporation.getId() != null)) {
-            SystemNotificationDto<CorporationDto> notification = new SystemNotificationDto<>();
-            notification.setObjectId(corporation.getId());
-            notification.setObject(corporation);
-            rabbitTemplate.convertAndSend(corporationDeleteExchange.getName(), "", notification);
-        }
-    }
 
     @Override
     @Async

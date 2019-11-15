@@ -1,13 +1,9 @@
 package com.simia.account.facade.user.impl;
 
 import com.simia.account.facade.user.UserFacade;
-import com.simia.account.service.kyc.KycRequestService;
-import com.simia.account.service.user.CorporationService;
 import com.simia.account.service.user.UserEmailService;
 import com.simia.account.service.user.UserPhoneService;
 import com.simia.account.service.user.UserService;
-import com.simia.share.common.model.dto.account.enumerated.KycStatus;
-import com.simia.share.common.model.dto.account.kyc.KycRequestDto;
 import com.simia.share.common.model.dto.account.user.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserFacadeImpl implements UserFacade {
-
-    @Autowired
-    private CorporationService corporationService;
-
-    @Autowired
-    private KycRequestService kycRequestService;
-
+    
     @Autowired
     private UserPhoneService userPhoneService;
 
@@ -49,8 +39,6 @@ public class UserFacadeImpl implements UserFacade {
             List<UserDto> users = userService.getByIds(ids);
             if (CollectionUtils.isNotEmpty(users)) {
                 List<UUID> userIds = users.stream().map(UserDto::getId).collect(Collectors.toList());
-                Map<UUID, List<CorporationDto>> corporationMap = corporationService.getCorporationByUserIds(userIds);
-                Map<UUID, List<KycRequestDto>> kycMap = kycRequestService.getAllByUserIdsAndStatuses(ids, Arrays.asList(KycStatus.KYC_PASSED));
                 Map<UUID, UserPhoneDto> phoneMap = userPhoneService.getMapByUserIds(userIds);
                 Map<UUID, UserEmailDto> emailMap = userEmailService.getMapByUserIds(userIds);
                 result = users.stream().map(i -> {
@@ -59,8 +47,6 @@ public class UserFacadeImpl implements UserFacade {
                     detailedUser.setUser(i);
                     detailedUser.setPhone(phoneMap.getOrDefault(i.getId(), new UserPhoneDto()).getPhone());
                     detailedUser.setEmail(emailMap.getOrDefault(i.getId(), new UserEmailDto()).getEmail());
-                    detailedUser.setCorporations(corporationMap.get(i.getId()));
-                    detailedUser.setPassedKycRequests(kycMap.get(i.getId()));
                     return detailedUser;
                 }).collect(Collectors.toList());
             }
@@ -82,7 +68,6 @@ public class UserFacadeImpl implements UserFacade {
                     publicUser.setId(i.getId());
                     publicUser.setFirstName(i.getFirstName());
                     publicUser.setLastName(i.getLastName());
-                    publicUser.setMiddleName(i.getMiddleName());
                     publicUser.setAvatarUrl(i.getAvatarUrl());
                     publicUser.setPhone(phoneMap.getOrDefault(i.getId(), new UserPhoneDto()).getPhone());
                     publicUser.setEmail(emailMap.getOrDefault(i.getId(), new UserEmailDto()).getEmail());
