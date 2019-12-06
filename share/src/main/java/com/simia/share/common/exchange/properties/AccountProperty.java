@@ -33,4 +33,8 @@ public class AccountProperty {
     private String sendCode;
     
     private String userAuth;
+    
+    private String updateExpertStatus;
+
+    private String makeTransaction;
 }

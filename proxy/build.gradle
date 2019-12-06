@@ -1,7 +1,7 @@
 buildscript {
 	ext {
-		springBootVersion = '2.2.0.RELEASE'
-		springCloudVersion = 'Greenwich.SR3'
+		springBootVersion = '2.1.5.RELEASE'
+		springCloudVersion = 'Greenwich.SR1'
 		cache2kVersion = '1.2.4.Final'
 		commonsCollectionsVersion = '4.4'
 		commonsLangVersion = '3.9'
