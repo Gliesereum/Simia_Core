@@ -1,6 +1,6 @@
 spring:
   application:
-    name: karma-service
+    name: expert-service
   mvc:
     logResolvedException: false
   jackson:
@@ -9,7 +9,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
-module-url: /karma/v1
+module-url: /expert/v1
 
 springfox:
   documentation:
@@ -21,7 +21,7 @@ server:
   port: 8240
 
 db:
-  schema: karma
+  schema: expert
 
 security:
   properties:
@@ -54,6 +54,8 @@ exchange:
       createOrGetPublicUser: http://account-service/user/public/create-or-get
       findUserPhonesByUserIds: http://account-service/phone/by-user-ids
       publicStatistic: http://account-service/statistic/public
+      updateExpertStatus: http://account-service/user/update-expert-status
+      makeTransaction: http://account-service/wallet/make-transaction
     mail:
       emailVerification: http://mail-service/email/verification
       sentEmail: http://mail-service/email/single

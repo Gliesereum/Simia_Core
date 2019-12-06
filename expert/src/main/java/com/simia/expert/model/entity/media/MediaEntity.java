@@ -18,10 +18,18 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "media")
 public class MediaEntity extends AuditableDefaultEntity {
 
     @Column(name = "object_id")
     private UUID objectId;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "url")
     private String url;

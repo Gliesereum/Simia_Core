@@ -5,8 +5,8 @@ spring:
   servlet:
     multipart:
       enabled: true
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: 100MB
+      max-request-size: 100MB
 
 logging.level.org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter: ERROR
 
@@ -26,24 +26,12 @@ zuul:
     mail-service:
       path: /mail/v1/**
       service-id: mail-service
-    karma-service:
-      path: /karma/v1/**
-      service-id: karma-service
+    expert-service:
+      path: /expert/v1/**
+      service-id: expert-service
     file-service:
       path: /file/v1/**
       service-id: file-service
-    lending-gallery-service:
-      path: /lending-gallery/v1/**
-      service-id: lending-gallery-service
-    notification-service:
-      path: /notification/v1/**
-      service-id: notification-service
-    payment-service:
-      path: /payment/v1/**
-      service-id: payment-service
-    license-service:
-      path: /license/v1/**
-      service-id: license-service
     language-service:
       path: /language/v1/**
       service-id: language-service

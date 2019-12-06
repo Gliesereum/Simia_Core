@@ -14,6 +14,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "object_tag")
 public class ObjectTagEntity extends DefaultEntity {
 
     @Column(name = "object_id")
