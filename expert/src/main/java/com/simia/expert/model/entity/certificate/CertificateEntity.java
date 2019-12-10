@@ -14,6 +14,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "certificate")
 public class CertificateEntity extends AuditableDefaultEntity {
 
     @Column(name = "title")

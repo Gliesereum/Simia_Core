@@ -14,6 +14,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "city")
 public class CityEntity extends DefaultEntity {
 
     @Column(name = "name")
@@ -22,11 +24,7 @@ public class CityEntity extends DefaultEntity {
     @Column(name = "centre_latitude")
     private Double centreLatitude;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id", insertable = false, updatable = false)
-    private CountryEntity country;
-
-    @OneToMany
-    @JoinColumn(name = "object_id", insertable = false, updatable = false)
-    private Set<GeoPositionEntity> polygonPoints = new HashSet<>();
+    @Column(name = "centre_longitude")
+    private Double centreLongitude;
+    
 }

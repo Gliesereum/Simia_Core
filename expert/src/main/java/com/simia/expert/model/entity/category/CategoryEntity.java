@@ -14,6 +14,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "category")
 public class CategoryEntity extends AuditableDefaultEntity {
 
     @Column(name = "title")
@@ -22,10 +24,10 @@ public class CategoryEntity extends AuditableDefaultEntity {
     @Column(name = "icon_url")
     private String iconUrl;
 
-    @Column(name = "parent_id")
+    @Column(name = "parent_id", insertable = false, updatable = false)
     private UUID parentId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id", insertable = false, updatable = false)
-    private CategoryEntity parentCategory;
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+    @JoinColumn(name="parent_id")
+    private Set<CategoryEntity> childCategories = new HashSet<>();
 }
