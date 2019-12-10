@@ -22,6 +22,11 @@ public class CategoryController {
         return service.getAll();
     }
 
+    @GetMapping("/get-all-parents")
+    public List<CategoryDto> getAllParents() {
+        return service.getAllParents();
+    }
+
     @GetMapping("/{id}")
     public CategoryDto getById(@PathVariable("id") UUID id) {
         return service.getById(id);

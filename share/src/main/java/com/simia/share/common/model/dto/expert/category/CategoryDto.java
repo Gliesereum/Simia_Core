@@ -19,9 +19,5 @@ public class CategoryDto extends AuditableDefaultDto {
 
     private String iconUrl;
 
-    private UUID parentId;
-
-    private CategoryDto parentCategory;
-
-    private List<CategoryDto> childCategories = new ArrayList<>();
+   
 }

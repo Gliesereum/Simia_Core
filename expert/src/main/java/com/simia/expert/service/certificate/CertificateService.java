@@ -8,5 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CertificateService extends AuditableService<CertificateDto, CertificateEntity> {
-    
+
+    List<CertificateDto> getAllByExpertId(UUID id);
 }
