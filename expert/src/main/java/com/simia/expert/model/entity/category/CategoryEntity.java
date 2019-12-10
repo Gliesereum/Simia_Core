@@ -22,10 +22,10 @@ public class CategoryEntity extends AuditableDefaultEntity {
     @Column(name = "icon_url")
     private String iconUrl;
 
-    @Column(name = "parent_id")
+    @Column(name = "parent_id", insertable = false, unique = false)
     private UUID parentId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id", insertable = false, updatable = false)
-    private CategoryEntity parentCategory;
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+    @JoinColumn(name="parent_id")
+    private Set<CategoryEntity> childCategories = new HashSet<>();
 }
