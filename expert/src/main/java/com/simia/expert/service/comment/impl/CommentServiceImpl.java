@@ -76,14 +76,20 @@ public class CommentServiceImpl extends AuditableServiceImpl<CommentDto, Comment
 		if (CollectionUtils.isNotEmpty(objectIds)) {
 			List<CommentEntity> entities = commentRepository.findAllByObjectIdIn(objectIds);
 			if (CollectionUtils.isNotEmpty(entities)) {
-				List<CommentFullDto> comments = converter.convert(entities, CommentFullDto.class);
-				setUserInfo(comments);
-				result = comments.stream().collect(Collectors.groupingBy(CommentFullDto::getObjectId));
+				result = getUuidListMap(entities);
 			}
 		}
 		return result;
 	}
-	
+
+	private Map<UUID, List<CommentFullDto>> getUuidListMap(List<CommentEntity> entities) {
+		Map<UUID, List<CommentFullDto>> result;
+		List<CommentFullDto> comments = converter.convert(entities, CommentFullDto.class);
+		setUserInfo(comments);
+		result = comments.stream().collect(Collectors.groupingBy(CommentFullDto::getObjectId));
+		return result;
+	}
+
 	@Override
 	public CommentFullDto findByObjectIdForCurrentUser(UUID objectId) {
 		CommentFullDto result = null;
@@ -160,32 +166,40 @@ public class CommentServiceImpl extends AuditableServiceImpl<CommentDto, Comment
 	private RatingDto getRating(List<CommentEntity> comments) {
 		RatingDto rating = new RatingDto();
 		if (CollectionUtils.isNotEmpty(comments)) {
-			int count = comments.size();
-			int ratingSum = comments.stream().mapToInt(CommentEntity::getRating).sum();
-			BigDecimal ratingAvg = new BigDecimal(ratingSum).divide(new BigDecimal(count), 2, RoundingMode.HALF_DOWN);
-			rating.setCount(count);
-			rating.setRating(ratingAvg);
+			getRating(comments, rating);
 		} else {
 			rating.setCount(0);
 			rating.setRating(new BigDecimal(0));
 		}
 		return rating;
 	}
-	
+
+	private void getRating(List<CommentEntity> comments, RatingDto rating) {
+		int count = comments.size();
+		int ratingSum = comments.stream().mapToInt(CommentEntity::getRating).sum();
+		BigDecimal ratingAvg = new BigDecimal(ratingSum).divide(new BigDecimal(count), 2, RoundingMode.HALF_DOWN);
+		rating.setCount(count);
+		rating.setRating(ratingAvg);
+	}
+
 	private void setUserInfo(List<CommentFullDto> comments) {
 		if (CollectionUtils.isNotEmpty(comments)) {
 			List<UUID> ownerIds = comments.stream().map(CommentFullDto::getOwnerId).collect(Collectors.toList());
 			Map<UUID, UserDto> userMap = userExchangeService.findUserMapByIds(ownerIds);
 			if (MapUtils.isNotEmpty(userMap)) {
-				comments.forEach(i -> {
-					UserDto user = userMap.get(i.getOwnerId());
-					if (user != null) {
-						i.setFirstName(user.getFirstName());
-						i.setLastName(user.getLastName());
-						i.setAvatarUrl(user.getAvatarUrl());
-					}
-				});
+				setUserIn(comments, userMap);
 			}
 		}
+	}
+
+	private void setUserIn(List<CommentFullDto> comments, Map<UUID, UserDto> userMap) {
+		comments.forEach(i -> {
+			UserDto user = userMap.get(i.getOwnerId());
+			if (user != null) {
+				i.setFirstName(user.getFirstName());
+				i.setLastName(user.getLastName());
+				i.setAvatarUrl(user.getAvatarUrl());
+			}
+		});
 	}
 }

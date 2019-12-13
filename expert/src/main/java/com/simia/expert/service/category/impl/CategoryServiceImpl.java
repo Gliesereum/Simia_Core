@@ -25,7 +25,7 @@ import static com.simia.share.common.exception.messages.ExpertExceptionMessage.C
 @Service
 public class CategoryServiceImpl extends AuditableServiceImpl<CategoryDto, CategoryEntity> implements CategoryService {
 
-    
+
 
     @Autowired
     public CategoryServiceImpl(CategoryRepository categoryRepository, DefaultConverter defaultConverter) {
@@ -51,4 +51,39 @@ public class CategoryServiceImpl extends AuditableServiceImpl<CategoryDto, Categ
         return converter.convert(entities, dtoClass);
     }
 
+    @Override
+    public CategoryDto create(CategoryDto dto) {
+        checkModel(dto);
+        return super.create(dto);
+    }
+
+    @Override
+    public CategoryDto update(CategoryDto dto) {
+        checkModel(dto);
+        return super.update(dto);
+    }
+
+    @Override
+    public List<CategoryDto> getAllParents() {
+        List<CategoryEntity> entities = categoryRepository.getAllByParentIdIsNullAndObjectState(ObjectState.ACTIVE);
+        return converter.convert(entities, dtoClass);
+    }
+
+    @Override
+    public List<UUID> getIdsChildren(UUID id) {
+        List<UUID> result = new ArrayList<>();
+        CategoryDto category = getById(id);
+        if (category == null) {
+            throw new CustomException(CATEGORY_NOT_FOUND);
+        }
+        //result.addAll(categoryRepository.getChildrenIds(id)); todo
+        result.add(id);
+        return result;
+    }
+
+    private void checkModel(CategoryDto dto) {
+        if (dto.getParentId() != null && !isExist(dto.getParentId(), ObjectState.ACTIVE)) {
+            throw new CustomException(CATEGORY_NOT_FOUND);
+        }
+    }
 }
