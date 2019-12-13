@@ -28,7 +28,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.simia'
-version = '0.0.1'
+version = '0.1.4'
 sourceCompatibility = 11
 
 repositories {
@@ -46,11 +46,11 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-amqp')
 	implementation('org.springframework.boot:spring-boot-starter-mail')
 	implementation('org.flywaydb:flyway-core')
-    implementation "org.apache.commons:commons-collections4:${commonsCollectionsVersion}"
+	implementation "org.apache.commons:commons-collections4:${commonsCollectionsVersion}"
 	implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
 	implementation "org.modelmapper:modelmapper:${modelMapperVersion}"
 	implementation "io.lettuce:lettuce-core:${lettuceVersion}"
-    implementation "commons-io:commons-io:${commonsIOVersion}"
+	implementation "commons-io:commons-io:${commonsIOVersion}"
 	implementation "io.jsonwebtoken:jjwt:${jjwtVersion}"
 	implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
 
@@ -74,3 +74,5 @@ dependencyManagement {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
+
+

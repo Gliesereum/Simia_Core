@@ -27,15 +27,10 @@ public class CertificateController {
         return service.create(dto);
     }
 
-    @PutMapping
-    public CertificateDto update(@Valid @RequestBody CertificateDto dto) {
-        return service.update(dto);
-    }
+    
 
-    @DeleteMapping("/{id}")
-    public MapResponse delete(@PathVariable("id") UUID id) {
-        service.delete(id);
-        return new MapResponse("true");
+    @GetMapping("/by-expert")
+    public List<CertificateDto> getAllByExpertId(@RequestParam("id") UUID id) {
+        return service.getAllByExpertId(id);
     }
-
 }

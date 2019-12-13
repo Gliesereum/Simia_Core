@@ -14,6 +14,7 @@ buildscript {
 		apacheCsvVersion = '1.5'
 		swaggerVersion = '2.9.2'
 		reflectionsVersion = '0.9.11'
+		openviduVersion = '2.11.0'
 	}
 	repositories {
 		mavenCentral()
@@ -57,7 +58,8 @@ dependencies {
 	implementation "org.apache.commons:commons-csv:${apacheCsvVersion}"
 	implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
 	implementation "org.reflections:reflections:${reflectionsVersion}"
-	
+	implementation "io.openvidu:openvidu-java-client:${openviduVersion}"
+
 	runtimeOnly('org.postgresql:postgresql')
 	
 	compileOnly "org.springframework.boot:spring-boot-configuration-processor"
@@ -77,3 +79,5 @@ dependencyManagement {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
+
+

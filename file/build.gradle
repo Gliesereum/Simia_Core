@@ -9,7 +9,7 @@ buildscript {
 		commonsIOVersion = '2.6'
 		lombokVersion = '1.18.2'
 		logbackVersion = '1.2.3'
-		awsVersion = '1.11.665'
+		awsVersion = '1.11.475'
 		swaggerVersion = '2.9.2'
 	}
 	repositories {

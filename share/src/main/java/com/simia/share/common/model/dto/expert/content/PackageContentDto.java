@@ -1,10 +1,9 @@
-package com.simia.share.common.model.dto.expert.category;
+package com.simia.share.common.model.dto.expert.content;
 
 import com.simia.share.common.model.dto.AuditableDefaultDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import java.util.*;
 
@@ -12,12 +11,9 @@ import java.util.*;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class CategoryDto extends AuditableDefaultDto {
+public class PackageContentDto extends AuditableDefaultDto {
 
-    @NonNull
-    private String title;
+    private UUID packageId;
 
-    private String iconUrl;
-
-   
+    private UUID contentId;
 }
