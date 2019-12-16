@@ -24,4 +24,6 @@ public interface CommentRepository extends JpaRepository<CommentEntity, UUID> {
     CommentEntity findByIdAndOwnerId(UUID id, UUID ownerId);
 
     CommentEntity findByObjectIdAndOwnerId(UUID objectId, UUID ownerId);
+
+    List<CommentEntity> findByObjectIdOrderByCreateDateDesc(UUID objectId);
 }
