@@ -1,4 +1,4 @@
-package com.simia.share.common.model.dto.expert.expert;
+package com.simia.share.common.model.dto.expert.promo;
 
 import com.simia.share.common.model.dto.AuditableDefaultDto;
 import lombok.Data;
@@ -11,13 +11,9 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ExpertDto extends AuditableDefaultDto {
-	
-	private UUID userId;
-	
-	private String description;
-	
-	private String title;
-	
-	private String additional;
+public class InterestedUserDto extends AuditableDefaultDto {
+
+    private UUID promotionId;
+
+    private UUID userId;
 }
