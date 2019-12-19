@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.simia.share.common.databind.json.LocalDateTimeJsonDeserializer;
 import com.simia.share.common.databind.json.LocalDateTimeJsonSerializer;
-import com.simia.share.common.model.dto.DefaultDto;
+import com.simia.share.common.model.dto.AuditableDefaultDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class CommentDto extends DefaultDto {
+public class CommentDto extends AuditableDefaultDto {
 
     private UUID objectId;
 
